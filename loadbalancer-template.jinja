@@ -16,7 +16,7 @@ resources:
     backends:
     - name: lb-backend-{{ env["name"] }}
       balancingMode: UTILIZATION
-      group: zones/us-central1-a/instanceGroups/{{ properties["instanceGroups"] }}
+      group: {{ properties["instanceGroups"] }}
 
 - name: apache-url-map    
   type: compute.v1.urlMap

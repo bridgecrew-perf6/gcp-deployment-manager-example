@@ -1,0 +1,6 @@
+resources:
+- name: webserver-group
+  type: webserver-template.jinja
+  properties:
+    network: {{ properties["network"] }}
+    tags: {{ properties["tags"] }}

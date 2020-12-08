@@ -1,0 +1,8 @@
+resources:
+- name: webserver-as
+  type: compute.v1.autoscaler
+  properties:
+    zone: us-central1-a
+    target: {{ properties["instanceGroup"] }}
+    autoscalingPolicy:
+      maxNumReplicas: 5

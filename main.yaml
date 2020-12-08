@@ -2,6 +2,8 @@ imports:
 - path: autonetwork-template.jinja
 - path: firewall-template.jinja
 - path: webserver-template.jinja
+- path: webserver-ig-template.jinja
+- path: webserver-as-template.jinja
 - path: loadbalancer-template.jinja
 
 resources:
@@ -16,13 +18,18 @@ resources:
     Port: [22, 80]
     targetTags: ["webserver"]
 
-- name: webserver-group
-  type: webserver-template.jinja
+- name: webserver-ig
+  type: webserver-ig-template.jinja
   properties:
     network: $(ref.webserver-network.selfLink)
     tags: webserver
 
+- name: webserver-as
+  type: webserver-as-template.jinja
+  properties:
+    instanceGroups: $(ref.webserver-ig.selfLink)
+
 - name: webserver-lb
   type: loadbalancer-template.jinja
   properties:
-    instanceGroups: $(ref.webserver-network.webserver-ig.selfLink)
+    instanceGroups: $(ref.webserver-ig.selfLink)
