@@ -3,6 +3,6 @@ resources:
   type: compute.v1.autoscaler
   properties:
     zone: us-central1-a
-    target: {{ properties["instanceGroup"] }}
+    target: {{ properties["target"] }}
     autoscalingPolicy:
       maxNumReplicas: 5

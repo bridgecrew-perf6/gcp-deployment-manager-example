@@ -33,7 +33,7 @@ resources:
 - name: webserver-as
   type: webserver-as-template.jinja
   properties:
-    instanceGroups: $(ref.webserver-ig.selfLink)
+    target: $(ref.webserver-ig.selfLink)
 
 - name: webserver-lb
   type: loadbalancer-template.jinja
