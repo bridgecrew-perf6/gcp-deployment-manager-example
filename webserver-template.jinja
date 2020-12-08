@@ -1,0 +1,54 @@
+resources:
+- name: webserver-template
+  type: compute.v1.instanceTemplate
+  properties:
+    properties:
+      description: apache
+      tags:
+        items:
+          - {{ properties["tags"] }}
+      machineType: f1-micro
+      canIpForward: false
+      disks:
+      - deviceName: boot
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          sourceImage: projects/debian-cloud/global/images/family/debian-9
+      networkInterfaces:
+      - network: default
+      scheduling:
+        onHostMaintenance: MIGRATE
+        automaticRestart: true
+      serviceAccounts:
+        - email: default
+          scopes:
+          - https://www.googleapis.com/auth/compute.readonly
+          - https://www.googleapis.com/auth/devstorage.read_only
+          - https://www.googleapis.com/auth/service.management.readonly
+      metadata:
+        items:
+        - key: startup-script
+          value: |
+            #! /bin/bash
+            sudo apt-get update
+            sudo apt-get install apache2 -y
+            sudo service apache2 restart
+            echo '<!doctype html><html><body><h1>$(hostname)</h1></body></html>' | tee /var/www/html/index.html
+         
+- name: webserver-ig
+  type: compute.v1.instanceGroupManagers
+  properties:
+    baseInstanceName: apache
+    instanceTemplate: $(ref.webserver-template.selfLink)
+    targetSize: 2
+    zone: us-central1-a
+
+- name: webserver-as
+  type: compute.v1.autoscaler
+  properties:
+    zone: us-central1-a
+    target: $(ref.webserver-ig.selfLink)
+    autoscalingPolicy:
+      maxNumReplicas: 5

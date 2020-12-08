@@ -1,0 +1,23 @@
+imports:
+- path: firewall-template.jinja
+- path: webserver-template.jinja
+- path: loadbalancer-template.jinja
+
+resources:
+- name: webserver-firewall
+  type: firewall-template.jinja
+  properties:
+    network: default
+    IPProtocol: TCP
+    Port: [22, 80]
+    targetTags: ["webserver"]
+
+- name: webserver-group
+  type: webserver-template.jinja
+  properties:
+    tags: webserver
+
+- name: webserver-lb
+  type: loadbalancer-template.jinja
+  properties:
+    instanceGroups: webserver-ig
