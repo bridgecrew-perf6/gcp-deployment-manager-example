@@ -18,6 +18,12 @@ resources:
     Port: [22, 80]
     targetTags: ["webserver"]
 
+- name: webserver-template
+  type: webserver-template.jinja
+  properties:
+      tags: webserver
+      network: $(ref.webserver-network.selfLink)
+
 - name: webserver-ig
   type: webserver-ig-template.jinja
   properties:
