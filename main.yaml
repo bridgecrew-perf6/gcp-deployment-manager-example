@@ -7,6 +7,7 @@ resources:
 - name: webserver-firewall
   type: firewall-template.jinja
   properties:
+    projectName: {{ properties["projectsName"] }}
     IPProtocol: TCP
     Port: [22, 80]
     targetTags: ["webserver"]
@@ -14,6 +15,7 @@ resources:
 - name: webserver-group
   type: webserver-template.jinja
   properties:
+    projectName: {{ properties["projectsName"] }}
     tags: webserver
 
 - name: webserver-lb
