@@ -18,21 +18,21 @@ resources:
       balancingMode: UTILIZATION
       group: zones/us-central1-a/instanceGroups/{{ properties["instanceGroups"] }}
 
-  - name: apache-url-map
-    type: compute.v1.urlMap
+  - type: compute.v1.urlMap
+    name: apache-url-map    
     properties:
       defaultService: $(ref.lb-{{ env["name"] }}.selfLink)
 
-  - name: apache-http-proxy
-    type: compute.v1.targetHttpProxy
+  - type: compute.v1.targetHttpProxy
+    name: apache-http-proxy
     properties:
       urlMap: $(ref.apache-url-map.selfLink)
 
-  - name: apache-ipaddress
-    type: compute.v1.globalAddress
+  - type: compute.v1.globalAddress
+    name: apache-ipaddress
 
-  - name: apache-http-forwardingrule
-    type: compute.v1.globalForwardingRule
+  - type: compute.v1.globalForwardingRule
+    name: apache-http-forwardingrule
     properties:
       target: $(ref.apache-http-proxy.selfLink)
       IPAddress: $(ref.apache-ipaddress.address)
