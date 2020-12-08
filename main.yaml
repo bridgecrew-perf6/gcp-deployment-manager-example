@@ -25,4 +25,4 @@ resources:
 - name: webserver-lb
   type: loadbalancer-template.jinja
   properties:
-    instanceGroups: webserver-ig
+    instanceGroups: $(ref.webserver-network.webserver-ig.selfLink)
