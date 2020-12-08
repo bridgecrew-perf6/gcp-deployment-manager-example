@@ -1,12 +1,12 @@
 resources:
-- type: gcp-types/compute-v1:httpHealthChecks
-  name: health-check-{{ env["name"] }}
+- name: health-check-{{ env["name"] }}
+  type: gcp-types/compute-v1:httpHealthChecks
   properties:
     port: 80
     requestPath: /
 
-- type: gcp-types/compute-v1:backendServices
-  name: lb-{{ env["name"] }}
+- name: lb-{{ env["name"] }}
+  type: gcp-types/compute-v1:backendServices
   properties:
     healthChecks:
       - $(ref.health-check-{{ env["name"] }}.selfLink)
@@ -18,21 +18,21 @@ resources:
       balancingMode: UTILIZATION
       group: zones/us-central1-a/instanceGroups/{{ properties["instanceGroups"] }}
 
-  - type: compute.v1.urlMap
-    name: apache-url-map    
+  - name: apache-url-map    
+    type: compute.v1.urlMap
     properties:
       defaultService: $(ref.lb-{{ env["name"] }}.selfLink)
 
-  - type: compute.v1.targetHttpProxy
-    name: apache-http-proxy
+  - name: apache-http-proxy
+    type: compute.v1.targetHttpProxy
     properties:
       urlMap: $(ref.apache-url-map.selfLink)
 
-  - type: compute.v1.globalAddress
-    name: apache-ipaddress
+  - name: apache-ipaddress
+    type: compute.v1.globalAddress
 
-  - type: compute.v1.globalForwardingRule
-    name: apache-http-forwardingrule
+  - name: apache-http-forwardingrule
+    type: compute.v1.globalForwardingRule
     properties:
       target: $(ref.apache-http-proxy.selfLink)
       IPAddress: $(ref.apache-ipaddress.address)
