@@ -1,5 +1,5 @@
 resources:
-- name: webserver-as
+- name: {{ env["name"] }}
   type: compute.v1.autoscaler
   properties:
     zone: us-central1-a

@@ -1,5 +1,5 @@
 resources:
-- name: webserver-group
+- name: {{ env["name"] }}
   type: webserver-template.jinja
   properties:
     network: {{ properties["network"] }}
