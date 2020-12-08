@@ -1,13 +1,17 @@
 imports:
+- path: autonetwork-template.jinja
 - path: firewall-template.jinja
 - path: webserver-template.jinja
 - path: loadbalancer-template.jinja
 
 resources:
+- name: webserver-network
+  type: autonetwork-template.jinja
+
 - name: webserver-firewall
   type: firewall-template.jinja
   properties:
-    projectName: {{ properties["projectsName"] }}
+    network: $(ref.webserver-network.selfLink)
     IPProtocol: TCP
     Port: [22, 80]
     targetTags: ["webserver"]
@@ -15,7 +19,7 @@ resources:
 - name: webserver-group
   type: webserver-template.jinja
   properties:
-    projectName: {{ properties["projectsName"] }}
+    network: $(ref.webserver-network.selfLink)
     tags: webserver
 
 - name: webserver-lb

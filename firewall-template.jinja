@@ -2,7 +2,7 @@ resources:
 - name: {{ env["name"] }}
   type: compute.v1.firewall
   properties:
-    network: projects/{{ properties["projectName"] }}/global/networks/default
+    network: {{ properties["network"] }}
     sourceRanges: ["0.0.0.0/0"]
     targetTags: {{ properties["targetTags"] }}
     allowed:

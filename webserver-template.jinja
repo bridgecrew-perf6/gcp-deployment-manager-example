@@ -17,7 +17,7 @@ resources:
         initializeParams:
           sourceImage: projects/debian-cloud/global/images/family/debian-9
       networkInterfaces:
-      - network: projects/{{ properties["projectsName"] }}/global/networks/default
+      - network: {{ properties["network"] }}
       scheduling:
         onHostMaintenance: MIGRATE
         automaticRestart: true
