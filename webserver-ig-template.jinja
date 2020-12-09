@@ -1,7 +1,8 @@
-resources:
+res
 - name: {{ env["name"] }}
   type: compute.v1.instanceGroupManagers
   properties:
     baseInstanceName: {{ properties["baseInstanceName"] }}
     instanceTemplate: {{ properties["instanceTemplate"] }}
     targetSize: {{ properties["targetSize"] }}
+    zone: us-central1-a
