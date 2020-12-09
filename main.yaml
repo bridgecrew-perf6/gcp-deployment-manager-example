@@ -34,9 +34,9 @@ resources:
 - name: webserver-as
   type: webserver-as-template.jinja
   properties:
-    target: $(ref.webserver-ig.instanceGroup)
+    target: $(ref.webserver-ig.selfLink)
 
 - name: webserver-lb
   type: loadbalancer-template.jinja
   properties:
-    instanceGroups: $(ref.webserver-ig.selfLink)
+    instanceGroups: $(ref.webserver-ig.instanceGroup)
