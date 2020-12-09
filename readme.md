@@ -1,1 +1,2 @@
-현재 webserver-as, loadbalander에서 target 항목을 잘못지정했다는 에러가 발생하고있음
+GCP Deployment Manager Example
+---
