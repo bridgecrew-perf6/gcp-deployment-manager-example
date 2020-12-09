@@ -1,8 +1,14 @@
-GCP Deployment Manager Example
+# GCP Deployment Manager Example
 ---
 
-1. How to use
-    In the GCP shell, run commands below.
-    ```
-    gcloud deployment-manager deployments create sample-project --config main.yaml
-    ```
+### How to use
+
+In the GCP shell, run commands below.
+```
+# create deployment
+gcloud deployment-manager deployments create sample-project --config main.yaml
+
+# delete deployment
+gcloud deployment-manager deployments delete sample-project
+```
+
