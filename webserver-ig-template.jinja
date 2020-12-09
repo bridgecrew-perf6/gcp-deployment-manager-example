@@ -1,6 +1,6 @@
-resources:
 - name: {{ env["name"] }}
-  type: webserver-template.jinja
+  type: compute.v1.instanceGroupManagers
   properties:
-    network: {{ properties["network"] }}
-    tags: {{ properties["tags"] }}
+    baseInstanceName: {{ properties["baseInstanceName"] }}
+    instanceTemplate: {{ properties["instanceTemplate"] }}
+    targetSize: {{ properties["targetSize"] }}
