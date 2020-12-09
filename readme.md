@@ -1,5 +1,7 @@
 # GCP Deployment Manager Example
----
+This is a example for GCP Deployment Manager. You can exercise with this repo.
+Clone this repo in GCP shell and have fun !
+
 
 ### How to use
 
